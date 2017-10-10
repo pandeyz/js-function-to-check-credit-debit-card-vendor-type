@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Credit Card Type Checking</title>
+	<script type="text/javascript">
+	function GetCardType(number)
+	{
+	    // visa
+	    var re = new RegExp("^4");
+	    if (number.match(re) != null)
+	        return "Visa";
+
+	    // Mastercard 
+	    // Updated for Mastercard 2017 BINs expansion
+	     if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+	        return "Mastercard";
+
+	    // AMEX
+	    re = new RegExp("^3[47]");
+	    if (number.match(re) != null)
+	        return "AMEX";
+
+	    // Discover
+	    re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+	    if (number.match(re) != null)
+	        return "Discover";
+
+	    // Diners
+	    re = new RegExp("^36");
+	    if (number.match(re) != null)
+	        return "Diners";
+
+	    // Diners - Carte Blanche
+	    re = new RegExp("^30[0-5]");
+	    if (number.match(re) != null)
+	        return "Diners - Carte Blanche";
+
+	    // JCB
+	    re = new RegExp("^35(2[89]|[3-8][0-9])");
+	    if (number.match(re) != null)
+	        return "JCB";
+
+	    // Visa Electron
+	    re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
+	    if (number.match(re) != null)
+	        return "Visa Electron";
+	        
+	   	// Maestro Card
+	    re = new RegExp("^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$");
+	    if (number.match(re) != null)
+	        return "Maestro Card";
+
+	    return "";
+	}
+
+	alert( GetCardType('501800000009') );
+
+	/*
+	Test it with
+	Visa: 4000 0000 0000 0002
+	Maestro: 5018 0000 0009
+	Master Card: 5100 0000 0000 0008
+	Discover: 6011 0000 0000 0004
+	*/
+	</script>
+
+</head>
+<body>
+	<!-- 
+	Common credit card vendor regular expressions:
+
+	Amex Card: ^3[47][0-9]{13}$
+	BCGlobal: ^(6541|6556)[0-9]{12}$
+	Carte Blanche Card: ^389[0-9]{11}$
+	Diners Club Card: ^3(?:0[0-5]|[68][0-9])[0-9]{11}$
+	Discover Card: ^65[4-9][0-9]{13}|64[4-9][0-9]{13}|6011[0-9]{12}|(622(?:12[6-9]|1[3-9][0-9]|[2-8][0-9][0-9]|9[01][0-9]|92[0-5])[0-9]{10})$
+	Insta Payment Card: ^63[7-9][0-9]{13}$
+	JCB Card: ^(?:2131|1800|35\d{3})\d{11}$
+	KoreanLocalCard: ^9[0-9]{15}$
+	Laser Card: ^(6304|6706|6709|6771)[0-9]{12,15}$
+	Maestro Card: ^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$
+	Mastercard: ^5[1-5][0-9]{14}$
+	Solo Card: ^(6334|6767)[0-9]{12}|(6334|6767)[0-9]{14}|(6334|6767)[0-9]{15}$
+	Switch Card: ^(4903|4905|4911|4936|6333|6759)[0-9]{12}|(4903|4905|4911|4936|6333|6759)[0-9]{14}|(4903|4905|4911|4936|6333|6759)[0-9]{15}|564182[0-9]{10}|564182[0-9]{12}|564182[0-9]{13}|633110[0-9]{10}|633110[0-9]{12}|633110[0-9]{13}$
+	Union Pay Card: ^(62[0-9]{14,17})$
+	Visa Card: ^4[0-9]{12}(?:[0-9]{3})?$
+	Visa Master Card: ^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$
+
+	https://stackoverflow.com/questions/9315647/regex-credit-card-number-tests
+	http://jquerycreditcardvalidator.com/
+	https://jsfiddle.net/zed6h3na/
+	-->
+</body>
+</html>
